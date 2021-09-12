@@ -3,12 +3,16 @@
    */
 
   const {
+    test,
+    expect
+  } = require("@jest/globals");
+  const {
     game
   } = require("../game");
 
   beforeAll(() => {
     let fs = require("fs");
-    let fileContents = fs.readFileSync("index.html", "UTF-8");
+    let fileContents = fs.readFileSync("/workspace/game_to_test_jest/index.htm", "UTF-8");
     document.open();
     document.write(fileContents);
     document.close();
@@ -26,5 +30,8 @@
     });
     test("choices key exist", () => {
       expect("choices" in game).toBe(true);
+    });
+    test("choices contain correct ids", () => {
+      expect(game.choices).toEqual(["button1", "button2", "button3", "button4"]);
     });
   });
